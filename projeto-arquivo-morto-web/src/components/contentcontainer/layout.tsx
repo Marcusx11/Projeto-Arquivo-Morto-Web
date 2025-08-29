@@ -6,7 +6,11 @@ import { Layout, Breadcrumb } from 'antd';
 const { Content } = Layout;
 
 
-export default function ContentContainerLayout() {
+export default function ContentContainerLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
     return (
         <Content style={{ padding: '0 48px' }}>
             <div
@@ -18,7 +22,7 @@ export default function ContentContainerLayout() {
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
             }}
             >
-                Content
+            {children}
             </div>
       </Content>
     );

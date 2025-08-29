@@ -1,17 +1,27 @@
 'use client';
 
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Breadcrumb } from 'antd';
 import ContentContainerLayout from '@/components/contentcontainer/layout';
+import RootLayout from '@/app/layout';
+import AppBarLayout from '@/components/appbar/layout';
+import "../../app/globals.css";
 
-export default function EmpresaLayout() {
-    return (
-        <Layout>
-            <Breadcrumb
-                style={{ margin: '16px 0', color: '#fff' }}
-                items={[{ title: 'Empresas' }, { title: ' / Pesquisar' }]}
+export default function EmpresaLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <AppBarLayout />
+        <Breadcrumb
+                style={{ marginLeft: '16px', color: 'black' }}
+                items={[{ title: 'Empresas' }, { title: 'Pesquisar' }]}
             />
-           <ContentContainerLayout />
-        </Layout>
-    );
+        {children}
+      </body>
+    </html>
+  );
 }
