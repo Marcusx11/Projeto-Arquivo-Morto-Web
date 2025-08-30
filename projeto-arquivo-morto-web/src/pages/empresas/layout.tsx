@@ -19,7 +19,6 @@ export default function EmpresaLayout({
         <ContentContainerLayout breadCrumbList={breadCrumbList}>
           {children}
         </ContentContainerLayout>
-        {children}
       </body>
     </html>
   );
