@@ -2,6 +2,9 @@
 
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { usePathname } from 'next/navigation';
 
 const { Header } = Layout;
 
@@ -24,9 +27,19 @@ const textStyle: React.CSSProperties = {
 
 export default function AppBarLayout() {
 
+    const pathname = usePathname();
+    const router = useRouter();
+    const [current, setCurrent] = useState(pathname ? pathname : '/');
+
+    const handleClick = (e: { key: string }) => {
+        setCurrent(e.key);
+        console.log(`Navigating to ${e.key}`);
+        router.push(e.key);
+    };
+
     const menuItems = [
-        { key: '1', label: 'Principal', style: { ...textStyle, fontSize: '14px' } },
-        { key: '2', label: 'Empresas', style: { ...textStyle, fontSize: '14px' } },
+        { key: '/', label: 'Principal', style: { ...textStyle, fontSize: '14px' }, },
+        { key: '/empresas', label: 'Empresas', style: { ...textStyle, fontSize: '14px' } },
     ];
 
     return (
@@ -36,9 +49,11 @@ export default function AppBarLayout() {
             </div>
             <Menu
                 mode="horizontal"
-                defaultSelectedKeys={['1']}
+                defaultSelectedKeys={['/']}
+                selectedKeys={[current]}
                 items={menuItems}
                 style={{ flex: 1, minWidth: 0, backgroundColor: '#8eadd3ff' }}
+                onClick={handleClick}
             />
         </Header>
     );

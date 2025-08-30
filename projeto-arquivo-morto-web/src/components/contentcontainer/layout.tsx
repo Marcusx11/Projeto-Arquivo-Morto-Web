@@ -2,28 +2,29 @@
 
 import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
-
 const { Content } = Layout;
-
 
 export default function ContentContainerLayout({
   children,
+  breadCrumbList
 }: Readonly<{
   children: React.ReactNode;
+  breadCrumbList: { title: string }[];
 }>) {
     return (
-        <Content style={{ padding: '0 48px' }}>
-            <div
-            style={{
-                background: '#ffffff',
-                minHeight: 300,
-                padding: 24,
-                borderRadius: 8,
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
-            }}
-            >
-            {children}
-            </div>
+      <Content style={{ padding: '0 48px' }}>
+        <Breadcrumb style={{ margin: '16px 0' }} items={breadCrumbList} />
+        <div
+          style={{
+              background: '#ffffff',
+              minHeight: 300,
+              padding: 24,
+              borderRadius: 8,
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
+          }}
+        >
+        {children}
+        </div>
       </Content>
     );
 }
