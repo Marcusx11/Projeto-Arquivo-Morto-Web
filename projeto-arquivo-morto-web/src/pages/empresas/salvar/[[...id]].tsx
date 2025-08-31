@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import EmpresaLayout from "../layout";
+import { Col, Row } from 'antd';
+import { Typography } from 'antd';
 
 export default function SalvarEmpresas() {
     const router = useRouter();

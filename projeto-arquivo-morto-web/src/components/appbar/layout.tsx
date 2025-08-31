@@ -33,7 +33,6 @@ export default function AppBarLayout() {
 
     const handleClick = (e: { key: string }) => {
         setCurrent(e.key);
-        console.log(`Navigating to ${e.key}`);
         router.push(e.key);
     };
 
