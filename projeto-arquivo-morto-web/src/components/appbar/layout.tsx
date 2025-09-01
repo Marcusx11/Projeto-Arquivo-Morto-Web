@@ -29,7 +29,16 @@ export default function AppBarLayout() {
 
     const pathname = usePathname();
     const router = useRouter();
-    const [current, setCurrent] = useState(pathname ? pathname : '/');
+
+    const retornarRotaCorrespondente = (rota: string): string => {
+        if (rota.includes('/empresas')) {
+            return '/empresas';
+        }
+
+        return "/";
+    };
+
+    const [current, setCurrent] = useState(pathname ? retornarRotaCorrespondente(pathname) : '/');
 
     const handleClick = (e: { key: string }) => {
         setCurrent(e.key);

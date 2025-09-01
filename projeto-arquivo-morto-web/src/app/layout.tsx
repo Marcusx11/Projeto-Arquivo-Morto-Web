@@ -1,5 +1,3 @@
-'use client';
-
 import "./globals.css";
 import AppBarLayout from "@/components/appbar/layout";
 

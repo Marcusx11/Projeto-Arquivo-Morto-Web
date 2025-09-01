@@ -1,5 +1,8 @@
-import EmpresaLayout from "./layout";
+'use client';
+
+import ContentContainerLayout from "@/components/contentcontainer/contentcontainer";
 import { Col, Row, Divider, Typography, Form, FormProps, Input, Button, Flex } from 'antd';
+import Link from "next/link";
 
 export default function Empresas() {
 
@@ -12,7 +15,7 @@ export default function Empresas() {
     };
 
     return (
-        <EmpresaLayout breadCrumbList={[{ title: 'Empresas' }, { title: 'Pesquisar' }]}>
+        <ContentContainerLayout breadCrumbList={[{ title: 'Empresas' }, { title: 'Pesquisar' }]}>
             <Row>
                 <Col span={24}>
                     <Typography.Title level={3}>Empresas</Typography.Title>
@@ -37,15 +40,17 @@ export default function Empresas() {
                             Pesquisar
                         </Button>
 
-                        <Button type="default">
-                            Novo
-                        </Button>
+                        <Link href="/empresas/salvar">
+                            <Button type="default">
+                                Novo
+                            </Button>
+                        </Link>
                     </Flex>
                 </Form.Item>
 
                 
             
             </Form>
-        </EmpresaLayout>
+        </ContentContainerLayout>
     );
 }
