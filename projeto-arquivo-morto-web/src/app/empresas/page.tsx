@@ -15,7 +15,7 @@ export default function Empresas() {
     };
 
     return (
-        <ContentContainerLayout breadCrumbList={[{ title: 'Empresas' }, { title: 'Pesquisar' }]}>
+        <ContentContainerLayout breadCrumbList={[{ title: 'Empresas' }]}>
             <Row>
                 <Col span={24}>
                     <Typography.Title level={3}>Empresas</Typography.Title>
