@@ -1,27 +1,27 @@
 'use client';
 
 import ContentContainerLayout from "@/components/contentcontainer/contentcontainer";
-import { getEmpresas } from "@/services/empresaService";
+import api from "@/libs/api";
 import { Col, Row, Divider, Typography, Form, FormProps, Input, Button, Flex, Table, TableProps, Pagination } from 'antd';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import EmpresasTableData from "@/tabledata/EmpresasTableData";
 
 export default function Empresas() {
-
-    const [empresas, setEmpresas] = useState([]);
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
         total: 0,
+        content: []
     });
 
     const fetchEmpresas = (nome: string, page: number) => {
-        getEmpresas(nome, page).then(({ content, page, size, totalElements }) => {
-            setEmpresas(content);
+        api.get(`/v1/empresas?pagina=${page}${(nome ? "&nome=" + nome : '')}`).then(({ data }) => {
             setPagination({
                 current: page + 1,
-                pageSize: size,
-                total: totalElements,
+                pageSize: data.size,
+                total: data.totalElements,
+                content: data.content
             });
         });
     }
@@ -38,14 +38,6 @@ export default function Empresas() {
         id: string;
         nome: string;
     }
-
-    const columns: TableProps<EmpresaDataType>['columns'] = [
-        {
-            title: 'Nome',
-            dataIndex: 'nome',
-            key: 'nome',
-        }
-    ];
 
     const novaPesquisa: FormProps<FieldType>['onFinish'] = (values) => {
         fetchEmpresas(values.nome || "", 0)
@@ -87,8 +79,8 @@ export default function Empresas() {
                 </Form.Item>
 
                 <Table<EmpresaDataType> 
-                    dataSource={empresas} 
-                    columns={columns} 
+                    dataSource={pagination.content} 
+                    {...EmpresasTableData}
                     rowKey="id"
                     pagination={{
                         position: ['bottomCenter'],

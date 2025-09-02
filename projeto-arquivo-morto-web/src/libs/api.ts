@@ -6,7 +6,9 @@ const api = axios.create({
 
 const context = "/v1/empresas"
 
-export const getEmpresas = async (nome: string, pagina: number) => {
+/*export const getEmpresas = async (nome: string, pagina: number) => {
   const response = await api.get(`${context}${pagina ? `?pagina=${pagina}` : ''}${nome ? `&nome=${nome}` : ''}`);
   return response.data;
-};
+};*/
+
+export default api;
