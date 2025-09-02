@@ -7,7 +7,7 @@ export default function ContentContainerLayout({
   breadCrumbList
 }: Readonly<{
   children: React.ReactNode;
-  breadCrumbList: { title: string, href?: string }[];
+  breadCrumbList: { title: React.ReactNode | string }[];
 }>) {
     return (
       <Content style={{ padding: '0 48px' }}>
