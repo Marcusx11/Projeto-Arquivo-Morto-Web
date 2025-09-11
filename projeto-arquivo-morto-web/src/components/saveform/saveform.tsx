@@ -90,7 +90,7 @@ export default function SaveForm({
 
                 <Form.Item label={null} wrapperCol={{ offset: 0 }}>
                     <Flex vertical gap="small" style={{ width: '100%' }}>
-                        <Button type="primary" htmlType="submit" block>
+                        <Button disabled={loading} type="primary" htmlType="submit" block>
                             Salvar
                         </Button>
                     </Flex>

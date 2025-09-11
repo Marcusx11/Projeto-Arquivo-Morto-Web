@@ -99,12 +99,12 @@ export default function DataTableForm({
 
                 <Form.Item label={null} wrapperCol={{ offset: 6 }}>
                     <Flex gap="small" align="flex-end" justify="flex-end">
-                        <Button type="primary" htmlType="submit">
+                        <Button disabled={loading} type="primary" htmlType="submit">
                             Pesquisar
                         </Button>
 
                         <Link href={saveNewRoute}>
-                            <Button type="default">
+                            <Button disabled={loading} type="default">
                                 Novo
                             </Button>
                         </Link>
