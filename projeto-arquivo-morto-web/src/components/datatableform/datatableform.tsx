@@ -2,16 +2,9 @@
 
 import { useEffect, useState } from "react";
 import api from "@/libs/api";
-import { Col, Row, Divider, Typography, Form, FormProps, Input, Button, Flex, Table, TableProps, Pagination } from 'antd';
-import EmpresasTableData from "@/tabledata/EmpresasTableData";
+import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Table } from 'antd';
 import Link from "next/link";
-
-interface FieldsValueData {
-  filterName: string;
-  label: string;
-  initialValue: string | number | boolean;
-  filterType: string;
-}
+import FieldsValueData from "@/models/FieldsValueData";
 
 export default function DataTableForm({
     columns,
@@ -37,7 +30,7 @@ export default function DataTableForm({
     const [loading, setLoading] = useState(false);
 
     const initialValues = fieldsValue.reduce((acc, e) => {
-        acc[e.filterName] = e.initialValue;
+        acc[e.name] = e.initialValue;
         return acc;
     }, {} as Record<string, string | number | boolean>);
 
@@ -67,6 +60,10 @@ export default function DataTableForm({
             setLoading(false);
         });
     }
+
+    useEffect(() => {
+        fetchData(1);
+    }, []);
     
     return (
         <>
@@ -79,19 +76,20 @@ export default function DataTableForm({
             <Form
                 name="form"
                 form={form}
-                onFinish={() => {}}
+                onFinish={() => fetchData(1)}
                 labelCol={{ span: 4 }}
                 initialValues={initialValues}
                 disabled={loading}  
                 >
                 {fieldsValue.map(field => {
-                    if (field.filterType === "text") {
+                    if (field.type === "text") {
                         return (
                             <Form.Item
-                                key={field.filterName}
+                                key={field.name}
                                 label={field.label}
-                                name={field.filterName}
+                                name={field.name}
                                 layout="vertical"
+                                wrapperCol={field.wrapperCol}
                             >
                                 <Input placeholder={field.label} />
                             </Form.Item>
@@ -122,7 +120,8 @@ export default function DataTableForm({
                         position: ['bottomCenter'],
                         current: pagination.current,
                         pageSize: pagination.pageSize,
-                        total: pagination.total
+                        total: pagination.total,
+                        onChange: (page) => fetchData(page)
                     }}
                 />
 
