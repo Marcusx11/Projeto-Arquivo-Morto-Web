@@ -26,7 +26,7 @@ export default function SaveForm({
         setLoading(true);
         
         api.get(`${context}/${id}`).then(({ data }) => {
-            setInitialValues(data);
+            form.setFieldsValue(data);
         }).finally(() => {
             setLoading(false);
         });
