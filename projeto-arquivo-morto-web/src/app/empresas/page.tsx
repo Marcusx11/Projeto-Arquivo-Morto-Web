@@ -1,5 +1,3 @@
-'use client';
-
 import EmpresasFormTableData from "@/formtabledata/EmpresasFormTableData";
 import ContentContainerLayout from "@/components/contentcontainer/contentcontainer";
 import DataTableForm from "@/components/datatableform/datatableform";

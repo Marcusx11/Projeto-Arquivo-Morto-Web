@@ -49,7 +49,8 @@ export default function DataTableForm({
         setLoading(true);
         const requestParams = construirRequestParams();
 
-        api.get(`${context}?pagina=${page - 1}${requestParams}`).then(({ data }) => {
+        api.get(`${context}?page=${page - 1}&size=${pagination.pageSize}${requestParams}`).then(({ data }) => {
+            console.log(data);
             setPagination({
                 current: data.page + 1,
                 pageSize: data.size,

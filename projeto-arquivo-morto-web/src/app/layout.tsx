@@ -1,5 +1,6 @@
 import "./globals.css";
 import AppBarLayout from "@/components/appbar/layout";
+import { App } from "antd";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppBarLayout />
-        {children}
+        <App>{children}</App>
       </body>
     </html>
   );

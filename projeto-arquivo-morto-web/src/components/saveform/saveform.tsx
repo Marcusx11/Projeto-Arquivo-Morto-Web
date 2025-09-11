@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/libs/api";
-import { Col, Row, Divider, Typography, Form, Input, Button, Flex } from 'antd';
+import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Spin, message } from 'antd';
 import FieldsValueData from "@/models/FieldsValueData";
 import { useRouter } from "next/navigation";
 
@@ -50,6 +50,7 @@ export default function SaveForm({
 
         request.then(() => {
             alert('Salvo com sucesso!');
+            // TODO -> Estado global de gerenciamento de mensagens
             router.back();
         }).finally(() => {
             setLoading(false);
@@ -97,6 +98,8 @@ export default function SaveForm({
                 </Form.Item>
 
             </Form>
+
+            <Spin spinning={loading} size="large" tip="Salvando..." fullscreen />
         </>
     );
 }
