@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "@/libs/api";
-import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Table } from 'antd';
+import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Table, Space, Tooltip } from 'antd';
 import Link from "next/link";
 import FieldsValueData from "@/models/FieldsValueData";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import ConfirmModal, { ConfirmModalRef } from "../confirmmodal/confirmmodal";
 
 export default function DataTableForm({
     columns,
@@ -20,14 +22,46 @@ export default function DataTableForm({
     saveNewRoute: string;
 }>) {
 
+    interface DataTableType {
+        id: number;
+        [key: string]: string | number | boolean;
+    }
+
+    const confirmDialogRef = useRef<ConfirmModalRef>(null);
     const [form] = Form.useForm();
+
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
         total: 0,
         content: []
     });
+
     const [loading, setLoading] = useState(false);
+
+    const columnsWithActions = [...columns, {
+        title: 'Ações',
+        key: 'acoes',
+        render: (record: DataTableType) => (
+            <Space size="middle">
+                <Tooltip title="Editar Registro">
+                    <Link href={`${saveNewRoute}/${record.id}`}>
+                        <Button disabled={loading} type="primary">
+                            <EditFilled />
+                        </Button>
+                    </Link>
+                </Tooltip>
+                
+                <Tooltip title="Excluir Registro">
+                    <Button danger onClick={() => handleDelete(record.id)} disabled={loading} type="primary">
+                        <DeleteFilled />
+                    </Button>
+                </Tooltip>        
+            </Space>
+        ),
+    }];
+
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const initialValues = fieldsValue.reduce((acc, e) => {
         acc[e.name] = e.initialValue;
@@ -60,6 +94,24 @@ export default function DataTableForm({
         }).finally(() => {
             setLoading(false);
         });
+    }
+
+    const handleDelete = (id: number) => {
+        setSelectedId(id);
+        confirmDialogRef.current?.show();
+    }
+
+    const deleteData = (id?: number) => {
+        setLoading(true);   
+
+        if (id) {
+            api.delete(`${context}/${id}`).then(() => {
+                fetchData(pagination.current);
+            }).finally(() => {
+                setLoading(false);
+                setSelectedId(null);
+            });
+        }
     }
 
     useEffect(() => {
@@ -97,7 +149,6 @@ export default function DataTableForm({
                         );
                     }
                 })}
-
                 <Form.Item label={null} wrapperCol={{ offset: 6 }}>
                     <Flex gap="small" align="flex-end" justify="flex-end">
                         <Button disabled={loading} type="primary" htmlType="submit">
@@ -112,8 +163,8 @@ export default function DataTableForm({
                     </Flex>
                 </Form.Item>
 
-                <Table
-                    columns={columns}
+                <Table<DataTableType>
+                    columns={columnsWithActions}
                     dataSource={pagination.content}
                     rowKey="id"
                     loading={loading}
@@ -126,7 +177,15 @@ export default function DataTableForm({
                     }}
                 />
 
-            </Form>
+                <ConfirmModal
+                    ref={confirmDialogRef}
+                    onConfirmAction={() => {
+                        deleteData(selectedId ?? undefined);
+                    }}
+                    title="Deletar Registro"
+                    message="Tem certeza de que deseja deletar o registro?"
+                />  
+            </Form>            
         </>
     );
 }

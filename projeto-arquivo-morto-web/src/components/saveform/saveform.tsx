@@ -9,12 +9,12 @@ import { useRouter } from "next/navigation";
 export default function SaveForm({
     title,
     id,
-    formValues,
+    fieldsValue,
     context
 }: Readonly<{
     title: string;
     id?: number;
-    formValues: FieldsValueData[];
+    fieldsValue: FieldsValueData[];
     context: string;
 }>) {
     const [form] = Form.useForm();
@@ -36,7 +36,7 @@ export default function SaveForm({
         if (id) {
             getDataById(id);
         } else {
-            setInitialValues(formValues.reduce((acc, e) => {
+            setInitialValues(fieldsValue.reduce((acc, e) => {
                 acc[e.name] = e.initialValue;
                 return acc;
             }, {} as Record<string, string | number | boolean>));
@@ -73,7 +73,7 @@ export default function SaveForm({
                 initialValues={initialValues}
                 disabled={loading}  
                 >
-                {formValues.map(field => {
+                {fieldsValue.map(field => {
                     if (field.type === "text") {
                         return (
                             <Form.Item
