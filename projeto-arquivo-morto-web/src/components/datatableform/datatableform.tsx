@@ -175,6 +175,9 @@ export default function DataTableForm({
                         total: pagination.total,
                         onChange: (page) => fetchData(page)
                     }}
+                    locale={{
+                        emptyText: "Nenhum registro encontrado. 🚫",
+                    }}
                 />
 
                 <ConfirmModal
