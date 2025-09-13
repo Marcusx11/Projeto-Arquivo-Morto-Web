@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { use, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const { Header } = Layout;
 
@@ -26,9 +26,7 @@ const textStyle: React.CSSProperties = {
 };
 
 export default function AppBarLayout() {
-
     const pathname = usePathname();
-    const router = useRouter();
 
     const retornarRotaCorrespondente = (rota: string): string => {
         if (rota.includes('/empresas')) {
@@ -38,16 +36,21 @@ export default function AppBarLayout() {
         return "/";
     };
 
+    useEffect(() => {
+        if (pathname) {
+            setCurrent(retornarRotaCorrespondente(pathname));
+        }
+    }, [pathname]);
+
     const [current, setCurrent] = useState(pathname ? retornarRotaCorrespondente(pathname) : '/');
 
     const handleClick = (e: { key: string }) => {
         setCurrent(e.key);
-        router.push(e.key);
     };
 
     const menuItems = [
-        { key: '/', label: 'Principal', style: { ...textStyle, fontSize: '14px' }, },
-        { key: '/empresas', label: 'Empresas', style: { ...textStyle, fontSize: '14px' } },
+        { key: '/', label: (<Link href="/">Principal</Link>), style: { ...textStyle, fontSize: '14px' },  },
+        { key: '/empresas', label: (<Link href="/empresas">Empresas</Link>), style: { ...textStyle, fontSize: '14px' } },
     ];
 
     return (

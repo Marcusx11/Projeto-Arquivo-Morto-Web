@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/libs/api";
-import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Spin, message } from 'antd';
+import { Col, Row, Divider, Typography, Form, Input, Button, Flex, Spin  } from 'antd';
 import FieldsValueData from "@/models/FieldsValueData";
 import { useRouter } from "next/navigation";
 
