@@ -3,9 +3,9 @@ import ContentContainerLayout from "@/components/contentcontainer/contentcontain
 import DataTableForm from "@/components/datatableform/datatableform";
 
 export default function Empresas() {
-    return (
-        <ContentContainerLayout breadCrumbList={[{ title: 'Empresas' }]}>
-            <DataTableForm {...EmpresasFormTableData} />
-        </ContentContainerLayout>
-    );
+  return (
+    <ContentContainerLayout breadCrumbList={[{ title: "Empresas" }]}>
+      <DataTableForm {...EmpresasFormTableData} />
+    </ContentContainerLayout>
+  );
 }

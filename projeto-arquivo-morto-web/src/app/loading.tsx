@@ -1,7 +1,5 @@
 import { Spin } from "antd";
 
 export default function Loading() {
-    return (
-        <Spin size="large" tip="Carregando..." fullscreen />
-    );
+  return <Spin size="large" tip="Carregando..." fullscreen />;
 }

@@ -4,4 +4,4 @@ export default interface FieldsValueData {
   initialValue: string | number | boolean;
   type: string;
   wrapperCol: { span: number };
-}
+};
