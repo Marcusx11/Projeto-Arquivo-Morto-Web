@@ -37,7 +37,6 @@ export default function DataTableForm({
     id: number;
     [key: string]: string | number | boolean;
   }
-
   const confirmDialogRef = useRef<ConfirmModalRef>(null);
   const [form] = Form.useForm();
 
@@ -82,10 +81,13 @@ export default function DataTableForm({
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const initialValues = fieldsValue.reduce((acc, e) => {
-    acc[e.name] = e.initialValue;
-    return acc;
-  }, {} as Record<string, string | number | boolean>);
+  const initialValues = fieldsValue.reduce(
+    (acc, e) => {
+      acc[e.name] = e.initialValue;
+      return acc;
+    },
+    {} as Record<string, string | number | boolean>
+  );
 
   const construirRequestParams = () => {
     const filters = form.getFieldsValue();
