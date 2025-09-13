@@ -50,10 +50,13 @@ export default function SaveForm({
       getDataById(id);
     } else {
       setInitialValues(
-        fieldsValue.reduce((acc, e) => {
-          acc[e.name] = e.initialValue;
-          return acc;
-        }, {} as Record<string, string | number | boolean>)
+        fieldsValue.reduce(
+          (acc, e) => {
+            acc[e.name] = e.initialValue;
+            return acc;
+          },
+          {} as Record<string, string | number | boolean>
+        )
       );
     }
   }, []);
