@@ -1,8 +1,5 @@
-"use client";
-
-import React from "react";
-import { Layout, Breadcrumb } from "antd";
-const { Content } = Layout;
+import { Breadcrumb } from "antd";
+import { Content } from "antd/es/layout/layout";
 
 export default function ContentContainerLayout({
   children,
