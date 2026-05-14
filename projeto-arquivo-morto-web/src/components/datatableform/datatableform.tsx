@@ -111,7 +111,6 @@ export default function DataTableForm({
         }${requestParams}`
       )
       .then(({ data }) => {
-        console.log(data);
         setPagination({
           current: data.page + 1,
           pageSize: data.size,
@@ -166,18 +165,20 @@ export default function DataTableForm({
         disabled={loading}
       >
         {fieldsValue.map((field) => {
-          if (field.type === "text") {
-            return (
-              <Form.Item
-                key={field.name}
-                label={field.label}
-                name={field.name}
-                layout="vertical"
-                wrapperCol={field.wrapperCol}
-              >
-                <Input placeholder={field.label} />
-              </Form.Item>
-            );
+          if (!field.esconderFiltro) {
+            if (field.type === "text") {
+              return (
+                <Form.Item
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  layout="vertical"
+                  wrapperCol={field.wrapperCol}
+                >
+                  <Input placeholder={field.label} />
+                </Form.Item>
+              );
+            }
           }
         })}
         <Form.Item label={null} wrapperCol={{ offset: 6 }}>

@@ -32,6 +32,9 @@ export default function AppBarLayout() {
     if (rota.includes("/empresas")) {
       return "/empresas";
     }
+    if (rota.includes("/usuarios")) {
+      return "/usuarios";
+    }
 
     return "/";
   };
@@ -59,6 +62,11 @@ export default function AppBarLayout() {
     {
       key: "/empresas",
       label: <Link href="/empresas">Empresas</Link>,
+      style: { ...textStyle, fontSize: "14px" },
+    },
+    {
+      key: "/usuarios",
+      label: <Link href="/usuarios">Usuários</Link>,
       style: { ...textStyle, fontSize: "14px" },
     },
   ];

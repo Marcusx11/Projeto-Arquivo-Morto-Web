@@ -96,18 +96,20 @@ export default function SaveForm({
         disabled={loading}
       >
         {fieldsValue.map((field) => {
-          if (field.type === "text") {
-            return (
-              <Form.Item
-                key={field.name}
-                label={field.label}
-                name={field.name}
-                layout="vertical"
-                wrapperCol={field.wrapperCol}
-              >
-                <Input placeholder={field.label} />
-              </Form.Item>
-            );
+          if (!(id && field.esconderEdicao)) {
+            if (field.type === "text") {
+              return (
+                <Form.Item
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  layout="vertical"
+                  wrapperCol={field.wrapperCol}
+                >
+                  <Input placeholder={field.label} />
+                </Form.Item>
+              );
+            }
           }
         })}
 
