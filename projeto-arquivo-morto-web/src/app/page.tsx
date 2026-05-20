@@ -1,9 +1,8 @@
 "use client";
 
+import { Col, Row, Flex } from "antd";
 import "@ant-design/v5-patch-for-react-19";
-import { Card, Col, Row, Flex, Divider, Typography } from "antd";
-import Image from "next/image";
-import Link from "next/link";
+import CardLink from "@/components/cardlink/cardlink";
 
 export default function Home() {
   return (
@@ -14,53 +13,19 @@ export default function Home() {
     >
       <Row gutter={24}></Row>
       <Col style={{ padding: "5px" }}>
-        <Card
-          hoverable
-          style={{
-            width: 340,
-            height: 340,
-            textAlign: "center",
-            borderRadius: 8,
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-          }}
-        >
-          <Link href="/empresas">
-            <Image
-              src="/office-building.png"
-              alt="Company"
-              width={200}
-              height={200}
-              style={{ display: "block", margin: "0 auto" }}
-            />
-            <Divider />
-            <Typography.Title level={4}>Empresas</Typography.Title>
-          </Link>
-        </Card>
+        <CardLink
+          route="/empresas"
+          imageSrc="/office-building.png"
+          title="Empresas"
+        />
       </Col>
 
       <Col style={{ padding: "5px" }}>
-        <Card
-          hoverable
-          style={{
-            width: 340,
-            height: 340,
-            textAlign: "center",
-            borderRadius: 8,
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-          }}
-        >
-          <Link href="/usuarios">
-            <Image
-              src="/Sample_User_Icon.png"
-              alt="User"
-              width={200}
-              height={200}
-              style={{ display: "block", margin: "0 auto" }}
-            />
-            <Divider />
-            <Typography.Title level={4}>Usuários</Typography.Title>
-          </Link>
-        </Card>
+        <CardLink
+          route="/usuarios"
+          imageSrc="/Sample_User_Icon.png"
+          title="Usuários"
+        />
       </Col>
     </Flex>
   );
